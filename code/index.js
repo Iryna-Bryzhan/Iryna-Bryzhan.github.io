@@ -201,6 +201,32 @@ thumbnails.forEach(function(thumbnail, index) {
 });
 
 
+// Получаем все миниатюры слайдов
+var thumbnails = Array.from(document.querySelectorAll('.itcss__thumbnail'));
+
+// Функція для обробки натискання на мініатюру слайда
+function handleThumbnailClick(index) {
+  // Отображаем соответствующий слайд
+  showSlide(index);
+  slideIndex = index; // Обновляем значение текущего индекса слайда
+}
+
+// Обработчик события для клика по миниатюре слайда
+thumbnails.forEach(function(thumbnail, index) {
+  thumbnail.addEventListener('click', function(e) {
+    e.preventDefault();
+    handleThumbnailClick(index);
+  });
+
+  // Додатковий обробник подій для тач-подій на мобільних пристроях
+  thumbnail.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    handleThumbnailClick(index);
+  });
+});
+
+
+
 const btnJoin = document.querySelector('.btn-join');
 const btnFirstScreen = document.querySelector('.btn-first-screen')
 const modalForm = document.querySelector('.modal-form');
@@ -406,299 +432,10 @@ console.log(formData)
 // }
 
 
-// const btnJoin = document.querySelector('.btn-join');
-// const btnFirstScreen = document.querySelector('.btn-first-screen')
-// const modalForm = document.querySelector('.modal-form');
-// const modal = document.querySelector('.modal');
-// const formJoin = document.querySelector('.form-join');
-// const formJoinInput = document.querySelector('.form-join-input')
-// btnJoin.addEventListener('click', () => {
-//   modalForm.style.display = "block"
-// })
-// btnFirstScreen.addEventListener('click', () => {
-//   modalForm.style.display = "block"
-// })
-// modalForm.addEventListener('click', (event) => {
-//   if (!modal.contains(event.target) || event.target === formJoin) {
-//     modalForm.style.display = "none";
-//   }
-// });
 
 
 
 
-// formJoin.addEventListener('submit', (e) => {
-//   e.preventDefault();
-
-  
-//   const nameInput = document.getElementById('name');
-//   const phoneInput = document.getElementById('phone');
-//   const emailInput = document.getElementById('email');
-//   const teamInput = document.getElementById('team');
-
-//   const nameValue = nameInput.value.trim();
-//   const phoneValue = phoneInput.value.trim();
-//   const emailValue = emailInput.value.trim();
-//   const teamValue = teamInput.value.trim();
-
-//   if (nameValue === '') {
-//     setErrorFor(nameInput, "Введіть своє ім'я");
-//   } else {
-//     setSuccessFor(nameInput);
-//   }
-
-//   if (phoneValue === '') {
-//     setErrorFor(phoneInput, 'Введіть свій телефон');
-//   } else if (!validatePhone(phoneValue)) {
-//     setErrorFor(phoneInput, 'Введіть коректний номер телефону');
-//   } else {
-//     setSuccessFor(phoneInput);
-//   }
-
-//   if (emailValue === '') {
-//     setErrorFor(emailInput, 'Введіть свою електронну пошту');
-//   } else if (!validateEmail(emailValue)) {
-//     setErrorFor(emailInput, 'Введіть коректну електронну пошту');
-//   } else {
-//     setSuccessFor(emailInput);
-//   }
-
-//   if (teamValue === '') {
-//     setErrorFor(teamInput, 'Введіть кількість людей');
-//   } else {
-//     setSuccessFor(teamInput);
-//   }
-
-// });
-
-// formCall.addEventListener('submit', (e) => {
-//   e.preventDefault();
-
-//   const validate = (value, pattern) => pattern.test(value);
-
-//   const nameCallInput = document.getElementById('name-call');
-//   const phoneCallInput = document.getElementById('phone-call');
-//   const emailCallInput = document.getElementById('email-call');
-
-//   const nameCallValue = nameCallInput.value.trim();
-//   const phoneCallValue = phoneCallInput.value.trim();
-//   const emailCallValue = emailCallInput.value.trim();
-
-//   if (nameCallValue === '') {
-//     setErrorFor(nameCallInput, "Введіть своє ім'я");
-//   } else {
-//     setSuccessFor(nameCallInput);
-//   }
-
-//   if (phoneCallValue === '') {
-//     setErrorFor(phoneCallInput, 'Введіть свій телефон');
-//   } else if (!validatePhone(phoneCallValue)) {
-//     setErrorFor(phoneCallInput, 'Введіть коректний номер телефону');
-//   } else {
-//     setSuccessFor(phoneCallInput);
-//   }
-
-//   if (emailCallValue === '') {
-//     setErrorFor(emailCallInput, 'Введіть свою електронну пошту');
-//   } else if (!validateEmail(emailCallValue)) {
-//     setErrorFor(emailCallInput, 'Введіть коректну електронну пошту');
-//   } else {
-//     setSuccessFor(emailCallInput);
-//   }
-// });
-
-// // Функції валідації і відображення помилок
-
-
-// function setErrorFor(input, message) {
-//   const formGroup = input.closest('.form-join-input-item');
-//   const errorDiv = formGroup.querySelector('.error');
-//   errorDiv.innerText = message;
-//   formGroup.classList.add('error');
-// }
-
-// function setSuccessFor(input) {
-//   const formGroup = input.closest('.form-join-input-item');
-//   const errorDiv = formGroup.querySelector('.error');
-//   errorDiv.innerText = '';
-//   formGroup.classList.remove('error');
-// }
-
-// function validatePhone(phone) {
-//   const phoneRegex = /^\+380\d{9}$/;
-//     return phoneRegex.test(phone);
-// }
-
-// function validateEmail(email) {
-//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//   return emailRegex.test(email);
-// }
-
-
-
-
-
-
-// const inputTel = document.getElementById('phone');
-// const btnFormJoin = document.querySelector('.btn-form-join')
-// patternTel = /0\d{2}-\d{3}-\d{2}-\d{2}/;
-
-
-// btnFormJoin.onclick = function(){ 
-//   if(patternTel.test(inputTel.value)){
-//       inputTel.style.border = "1px solid green";
-//       inputTel.style.backgroundColor = "rgb(148, 243, 148)"
-//       error.innerText = "";
-//   } else{
-//     const error = document.querySelectorAll('.error')
-//       error.innerText = "Не вірно введений номер";
-//       inputTel.style.border = "1px solid red";
-//       console.log(error)
-//   }
-// }
-
-
-
-
-// var container = document.querySelector(".robot-container");
-//         var images = document.getElementsByClassName("robot-image");
-//         var currentIndex = 0;
-//         var imageWidth = 30; // Зсув зображення вправо
-
-//         function toggleVisibility() {
-//             var currentImage = images[currentIndex];
-//             var nextIndex = (currentIndex + 1) % images.length;
-//             var nextImage = images[nextIndex];
-
-//             currentImage.style.opacity = 0;
-//             currentImage.style.transform = "translateX(" + imageWidth + "px)";
-
-//             setTimeout(function() {
-//                 currentImage.style.display = "none";
-//                 nextImage.style.display = "block";
-//                 nextImage.style.opacity = 1;
-//                 nextImage.style.transform = "translateX(0)";
-//             }, 700);
-
-//             currentIndex = nextIndex;
-//         }
-
-//         setInterval(toggleVisibility, 700);
-
-
-// const form = document.querySelector('.form');
-// const nameInputCall = document.getElementById('name-call');
-// const phoneInputCall = document.getElementById('phone-call');
-// const emailInputCall = document.getElementById('email-call');
-
-// form.addEventListener('submit', function(event) {
-//   event.preventDefault(); // Перед виконанням перезавантаження сторінки блокуємо його
-
-//   // Викликаємо функцію валідації для кожного поля
-//   const isNameValid = validateName();
-//   const isPhoneValid = validatePhone();
-//   const isEmailValid = validateEmail();
-
-//   // Перевіряємо, чи всі поля валідні
-//   if (isNameValid && isPhoneValid && isEmailValid) {
-//     // Всі поля валідні, можна відправляти форму
-//     form.submit();
-//   }
-// });
-
-// function validateName() {
-//   const nameValueCall = nameInputCall.value.trim();
-//   const errorDiv = nameInputCall.nextElementSibling;
-
-//   if (nameValueCall === '') {
-//     errorDiv.textContent = 'Введіть своє ім\'я';
-//     return false;
-//   }
-
-//   errorDiv.textContent = '';
-//   return true;
-// }
-
-// function validatePhone() {
-//   const phoneValueCall = phoneInputCall.value.trim();
-//   const errorDiv = phoneInputCall.nextElementSibling;
-
-//   const phoneRegex = /^\+380\d{9}$/;
-//   if (phoneValueCall === '') {
-//     errorDiv.textContent = 'Введіть номер телефону';
-//     return false;
-//   } else if (!phoneRegex.test(phoneValueCall)) {
-//     errorDiv.textContent = 'Введіть коректний номер телефону';
-//     return false;
-//   }
-
-//   errorDiv.textContent = '';
-//   return true;
-// }
-
-// function validateEmail() {
-//   const emailValueCall = emailInputCall.value.trim();
-//   const errorDiv = emailInputCall.nextElementSibling;
-
-//   const emailRegex = /^\S+@\S+\.\S+$/;
-//   if (emailValueCall === '') {
-//     errorDiv.textContent = 'Введіть свою електронну пошту';
-//     return false;
-//   } else if (!emailRegex.test(emailValueCall)) {
-//     errorDiv.textContent = 'Введіть коректну електронну пошту';
-//     return false;
-//   }
-
-//   errorDiv.textContent = '';
-//   return true;
-// }
-
-
-// const inputTel = document.getElementById('phone');
-// const btnFormJoin = document.querySelector('.btn-form-join')
-// patternTel = /0\d{2}-\d{3}-\d{2}-\d{2}/;
-
-
-// btnFormJoin.onclick = function(){ 
-//   if(patternTel.test(inputTel.value)){
-//       inputTel.style.border = "1px solid green";
-//       inputTel.style.backgroundColor = "rgb(148, 243, 148)"
-//       error.innerText = "";
-//   } else{
-//     const error = document.querySelectorAll('.error')
-//       error.innerText = "Не вірно введений номер";
-//       inputTel.style.border = "1px solid red";
-//       console.log(error)
-//   }
-// }
-
-
-
-
-// var container = document.querySelector(".robot-container");
-//         var images = document.getElementsByClassName("robot-image");
-//         var currentIndex = 0;
-//         var imageWidth = 30; // Зсув зображення вправо
-
-//         function toggleVisibility() {
-//             var currentImage = images[currentIndex];
-//             var nextIndex = (currentIndex + 1) % images.length;
-//             var nextImage = images[nextIndex];
-
-//             currentImage.style.opacity = 0;
-//             currentImage.style.transform = "translateX(" + imageWidth + "px)";
-
-//             setTimeout(function() {
-//                 currentImage.style.display = "none";
-//                 nextImage.style.display = "block";
-//                 nextImage.style.opacity = 1;
-//                 nextImage.style.transform = "translateX(0)";
-//             }, 700);
-
-//             currentIndex = nextIndex;
-//         }
-
-//         setInterval(toggleVisibility, 700);
 
 
 
