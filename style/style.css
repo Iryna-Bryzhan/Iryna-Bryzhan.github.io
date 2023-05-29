@@ -50,6 +50,7 @@ button:hover{
     display: none;
 }
 .header{
+    height: 90px;
     top: 30px;
     left: 0;
     right: 0;
@@ -169,6 +170,7 @@ button:hover{
     font-size: 1.8rem;
 }
 .form-join label{
+    text-align: start;
     font-size: 2rem;
     color: var(--color-white);
 }
@@ -1030,6 +1032,19 @@ button:hover{
 
 
 @media (min-width: 360px) and (max-width: 576px) {
+    .header{
+        height: 75px;
+    }
+    h1{
+        font-size: 3.5rem;
+        line-height: 130%;
+        margin-top: 20%;
+    }
+   
+    h2{
+        font-size: 4.2rem;
+        line-height: 120%;
+    }
     .menu{
         display: none;
     }  
@@ -1073,7 +1088,7 @@ button:hover{
         padding: 3% 5%;
     }
     .form-join__title{
-        font-size: 1.3rem;
+        font-size: 2rem;
         margin-bottom: 3%;
     }
     .btn-form-join {
@@ -1084,13 +1099,6 @@ button:hover{
     }
     #tariff ::selection{
         width: 80%;
-    }
-    .form-join__title{
-        font-size: 2.5rem;
-    }
-
-    .form-join__title{
-        font-size: 2.5rem;
     }
 
     .screen-first-content{
@@ -1107,13 +1115,7 @@ button:hover{
     position: relative;
     height: 260px;
 }
-    h1{
-        font-size: 3.7rem;
-    }
-    h2{
-        font-size: 5rem;
-        line-height: 120%;
-    }
+  
     .background-image{
         background-color: #201B33;
     }
@@ -1134,6 +1136,9 @@ button:hover{
         text-align: center;
         max-width: 100%;
         margin-bottom: 5rem;
+    }
+    .advantages__description{
+        font-size: 1.5rem;
     }
     #screen-details{
         height: 70%;
@@ -1163,11 +1168,14 @@ button:hover{
     }
     .detail-name{
         color: var(--color-white);
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-weight: bold;
     }
     .detail-icon{
-        margin-bottom: 28px;
+        margin-bottom: 15px;
+    }
+    .details-text{
+       font-size: 1.6rem;
     }
     .itcss__item img {
         width: 100%;
@@ -1217,13 +1225,14 @@ button:hover{
     margin-bottom: 1rem;
     font-size: 1.6rem;
     text-align: justify;
+    line-height: 140%;
 }
         .service-card__description-title {
              font-size: 2.3rem;
              margin-bottom: 0;
         }
         .service-card__description-price {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
         .service-card__description-price span {
             font-size: 2.4rem;
@@ -1235,6 +1244,34 @@ button:hover{
         .margin-1{
             margin-bottom: 1rem;
         }
+        .itcss__control_next {
+            right: -5%;
+        }
+        .itcss__item{
+            width: 100%;
+        }
+        .itcss__control_prev {
+            left: -5%;
+        }
+        .itcss__control_next::before {
+            border: none;
+            width: 40px;
+            height: 40px;
+            right: 0;
+            background: url(../img/free-icon-arrow-right-5082848.png) 0 0 / 40px no-repeat;
+        }
+        .itcss__control_prev::before {
+            border: none;
+            width: 40px;
+            height: 40px;
+            left: 0;
+            background: url(../img/free-icon-arrow-left-5082834.png) 0 0 / 40px no-repeat;
+        }
+        .itcss__thumbnail img {
+            width: 40px;
+            height: 40px;
+        }
+      
         #screen-partners {
             overflow: hidden;
         }
@@ -1246,7 +1283,7 @@ button:hover{
     }
     .form input{
         font-size: 1.8rem;
-        width: 350px;
+        width: 340px;
 
     }
     .btn-form{
