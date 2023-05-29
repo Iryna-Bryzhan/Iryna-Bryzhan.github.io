@@ -137,7 +137,7 @@ button:hover{
 }
 .modal{
     position: sticky;
-    top: 8%;
+    top: 5%;
     margin: 0 auto;
    max-width: 570px;
 }
@@ -1934,7 +1934,7 @@ h1{
 }
 .modal{
     position: sticky;
-    top: 10%;
+    top: 5%;
     margin: 0 auto;
    max-width: 570px;
 }
