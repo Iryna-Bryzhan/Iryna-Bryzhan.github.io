@@ -715,6 +715,7 @@ button:hover{
     width: 100%;
 }
 .partner-item p{
+	display: none;
     font-size: 2rem;
     font-weight: bold;
 }
