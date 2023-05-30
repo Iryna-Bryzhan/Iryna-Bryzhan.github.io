@@ -714,8 +714,8 @@ button:hover{
 .partner-item img{
     width: 100%;
 }
-.partner-item p{
-	display: none;
+.partner-item p{ 
+    display: none;
     font-size: 2rem;
     font-weight: bold;
 }
@@ -1308,7 +1308,7 @@ button:hover{
     .form input{
         font-size: 1.8rem;
         width: 340px;
-
+        margin-left: 1%;
     }
     .btn-form{
         width: 350px;
@@ -2040,6 +2040,13 @@ h1{
 .partner-item p {
     font-size: 1.8rem;
 }
+}
+
+.service-card:hover{
+    scale: 1.01;
+    -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+-moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.5);
 }
 /* 576px
   md: 768px,
