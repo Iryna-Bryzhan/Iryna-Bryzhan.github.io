@@ -73,8 +73,7 @@ function scrollFunction() {
   //   });
   // });
 
-
-    // Получаем все элементы слайдера
+// Получаем все элементы слайдера
 var slider = document.querySelector('.itcss__items');
 var slides = slider.querySelectorAll('.itcss__item');
 var prevButton = document.querySelector('.itcss__control_prev');
@@ -114,19 +113,51 @@ nextButton.addEventListener('click', function(e) {
   showSlide(slideIndex);
 });
 
-// Автоматическое переключение слайдов каждые 2 секунды
-function startSlider() {
-  setTimeout(function() {
+// Добавляем свайп на мобильных устройствах
+var touchStartX = 0;
+var touchEndX = 0;
+slider.addEventListener('touchstart', function(e) {
+  touchStartX = e.touches[0].clientX;
+});
+
+slider.addEventListener('touchend', function(e) {
+  touchEndX = e.changedTouches[0].clientX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  var swipeThreshold = 100; // Минимальное расстояние свайпа для переключения слайда
+  var swipeDirection = touchEndX - touchStartX;
+  if (swipeDirection > swipeThreshold) {
+    // Свайп влево
+    slideIndex--;
+    if (slideIndex < 0) {
+      slideIndex = slides.length - 1;
+    }
+    showSlide(slideIndex);
+  } else if (swipeDirection < -swipeThreshold) {
+    // Свайп вправо
     slideIndex++;
     if (slideIndex >= slides.length) {
       slideIndex = 0;
     }
     showSlide(slideIndex);
-    startSlider(); // Рекурсивно вызываем функцию для продолжения автоматического переключения
-  }, 6000);
+  }
 }
 
-startSlider(); // Запускаем автоматическое переключение 
+// Автоматическое переключение слайдов каждые 2 секунды
+var intervalId;
+
+function startSlider() {
+    slideIndex++;
+    if (slideIndex >= slides.length) {
+      slideIndex = 0;
+    }
+    showSlide(slideIndex);
+}
+
+// Запускаем автоматическое переключение
+startSlider();
 
 // Получаем все миниатюры слайдов
 var thumbnails = document.querySelectorAll('.itcss__thumbnail');
@@ -187,20 +218,6 @@ slides.forEach(function(slide) {
   // Добавьте миниатюру для каждого фото
   addThumbnail(imageUrl);
 });
-// Получаем все миниатюры слайдов
-var thumbnails = Array.from(document.querySelectorAll('.itcss__thumbnail'));
-
-// Обработчик события для клика по миниатюре слайда
-thumbnails.forEach(function(thumbnail, index) {
-  thumbnail.addEventListener('click', function(e) {
-    e.preventDefault();
-    // Отображаем соответствующий слайд
-    showSlide(index);
-    slideIndex = index; // Обновляем значение текущего индекса слайда
-  });
-});
-
-
 // Получаем все миниатюры слайдов
 var thumbnails = Array.from(document.querySelectorAll('.itcss__thumbnail'));
 
@@ -297,41 +314,68 @@ formJoin.addEventListener('submit', (e) => {
     setSuccessFor(teamInput);
   }
 
-  // Перевірка, чи всі поля форми мають успішний стан
-  if (isValid) {
-    // Створення об'єкта з даними форми
-    const formData = {
-      name: nameValue,
-      phone: phoneValue,
-      email: emailValue,
-      team: teamValue,
-      tariff: tariffInput
-    };
+// Перевірка, чи всі поля форми мають успішний стан
+if (isValid) {
+  // Створення об'єкта з даними форми
+  const formData = {
+    name: nameValue,
+    phone: phoneValue,
+    email: emailValue,
+    team: teamValue,
+    tariff: tariffInput
+  };
 console.log(formData)
-    // Виклик функції для відправки даних на сервер
-  //  sendFormJoinToServer(formData);
+  // Виклик функції для відправки даних на сервер
+  sendFormJoinToServer(formData, (success) => {
+    if (success) {
+      // Форма успішно відправлена
+      modalForm.style.display = "none";
+      console.log('Дані форми "formJoin" відправлено на сервер');
+    } else {
+      // Помилка під час відправки форми
+      console.log('Помилка під час відправки форми "formJoin"');
+    }
+  });
 
-    // Очищення форми
-    nameInput.value = '';
-    phoneInput.value = '';
-    emailInput.value = '';
-    teamInput.value = '';
+  // Очищення форми
+  nameInput.value = '';
+  phoneInput.value = '';
+  emailInput.value = '';
+  teamInput.value = '';
+  modalForm.style.display = "none";
+  alert("Заявка успішно відправлена")
 
-    // Очищення блоків помилок
-    setSuccessFor(nameInput);
-    setSuccessFor(phoneInput);
-    setSuccessFor(emailInput);
-    setSuccessFor(teamInput);
-
-    console.log('Дані форми "formJoin" відправлено на сервер');
-  }
+  // Очищення блоків помилок
+  setSuccessFor(nameInput);
+  setSuccessFor(phoneInput);
+  setSuccessFor(emailInput);
+  setSuccessFor(teamInput);
+}
 });
 
-// Функція для відправки даних форми на сервер
-// function sendFormJoinToServer(formData) {
-//   // Ваш код для відправки даних форми на сервер
-//   // Можна використовувати AJAX, Fetch або інші методи
-// }
+function sendFormJoinToServer(formData, callback) {
+// Виконати логіку відправки форми на сервер
+// Після отримання відповіді викликати callback з аргументом success, що вказує на успішність відправки форми
+// Наприклад:
+// Відправка форми з використанням fetch API
+// fetch('url_to_server', {
+//   method: 'POST',
+//   body: JSON.stringify(formData),
+//   headers: {
+//     'Content-Type': 'application/json'
+//   }
+// })
+//   .then(response => response.json())
+//   .then(data => {
+//     // Перевірка відповіді сервера і виклик callback з відповідним значенням success
+//     const success = data.success; // Припустимо, що сервер повертає об'єкт з полем "success"
+//     callback(success);
+//   })
+//   .catch(error => {
+//     console.error('Помилка під час відправки форми на сервер', error);
+//     callback(false);
+//   });
+}
 
 // Функції валідації і відображення помилок
 
@@ -359,7 +403,6 @@ function validateEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
-
 
 const form = document.querySelector('.form');
 
@@ -422,6 +465,7 @@ console.log(formData)
       nameError.textContent = '';
       phoneError.textContent = '';
       emailError.textContent = '';
+      alert('Заявка успішно відправлена')
   }
 });
 
@@ -432,8 +476,10 @@ console.log(formData)
 // }
 
 
-
-
+const btnClose = document.querySelector(".close")
+ btnClose.addEventListener('click', () => {
+  modalForm.style.display = "none";
+ })
 
 
 
